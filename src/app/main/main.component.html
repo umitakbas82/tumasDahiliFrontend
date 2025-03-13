@@ -1,35 +1,84 @@
 <body>
-    <mat-toolbar>
-       
-        <span>TÜMAŞ DAHİLİ</span>
-        <span class="example-spacer "></span>
-       
-        <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-          <mat-icon><svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-160q-33 0-56.5-23.5T400-240q0-33 23.5-56.5T480-320q33 0 56.5 23.5T560-240q0 33-23.5 56.5T480-160Zm0-240q-33 0-56.5-23.5T400-480q0-33 23.5-56.5T480-560q33 0 56.5 23.5T560-480q0 33-23.5 56.5T480-400Zm0-240q-33 0-56.5-23.5T400-720q0-33 23.5-56.5T480-800q33 0 56.5 23.5T560-720q0 33-23.5 56.5T480-640Z"/></svg></mat-icon>
-        </button>
-      </mat-toolbar>
+
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand">TUMAS DAHİLİ</a>
+          <form class="d-flex" role="search">
+           
+            <button class="btn " type="button"><i class="bi bi-three-dots-vertical" style="color:lightgray" data-bs-toggle="modal" data-bs-target="#exampleModal"></i></button>
+          </form>
+        </div>
+      </nav>
 
 
-      
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Yetkili Girişi</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer d-flex justify-content-center">
-            <p-button class="me-3" label="Giriş" [rounded]="true" severity="success" />
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-         
+
+      <div class="container pt-2">
+        <mat-form-field class="justify">
+            <mat-label><i class="bi bi-search me-2"></i>Arama</mat-label>
+            <input matInput (keyup)="applyFilter($event)" placeholder="..." #input>
+          </mat-form-field>
+          
+          <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+          
+            <!-- Position Column -->
+            <ng-container matColumnDef="position">
+              <th mat-header-cell *matHeaderCellDef> No. </th>
+              <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+            </ng-container>
+          
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef> Name </th>
+              <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+            </ng-container>
+          
+            <!-- Weight Column -->
+            <ng-container matColumnDef="weight">
+              <th mat-header-cell *matHeaderCellDef> Weight </th>
+              <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+            </ng-container>
+          
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="symbol">
+              <th mat-header-cell *matHeaderCellDef> Symbol </th>
+              <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+            </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          
+            <!-- Row shown when there is no matching data. -->
+            <tr class="mat-row" *matNoDataRow>
+              <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+            </tr>
+          </table>
+      </div>
+
+
+      <div class="modal fade " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header justify-content-center">
+              <p class="modal-title " id="exampleModalLabel">YETKİLİ GİRİŞİ</p>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                    <label for="floatingInput">Kullanıcı Adı</label>
+                  </div>
+                  <div class="form-floating">
+                    <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                    <label for="floatingPassword">Şife</label>
+                  </div>
+            </div>
+            <div class="modal-footer justify-content-center">
+              <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">İptal</button>
+              <button type="submit" class="btn btn-outline-success">Giriş</button>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
 
-      
 </body>
 
